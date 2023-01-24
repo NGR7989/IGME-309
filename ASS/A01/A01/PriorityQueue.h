@@ -16,6 +16,8 @@ public:
 private:
 	int trueLength; // What is the true size of the array 
 	int dataLength;	// How much useful data is inside the array 
+	void BubbleSort(T* items, int size);
+	void Swap(T *i, T *j);
 
 	T* items;
 };
@@ -82,6 +84,7 @@ template <class T> void PriorityQueue<T>::Push(T item)
 		dataLength++;
 	}
 
+	BubbleSort(items, dataLength);
 }
 
 template <class T> T PriorityQueue<T>::Pop()
@@ -129,4 +132,28 @@ template <class T> bool PriorityQueue<T>::IsEmpty()
 template <class T> int PriorityQueue<T>::GetSize()
 {
 	return dataLength;
+}
+
+
+template <class T> void PriorityQueue<T>::BubbleSort(T* arr, int size)
+{
+
+	for (int i = 0; i < size - 1; i++)
+	{
+		for (int j = 0; j < size - i - 1; j++)
+		{
+			//std::cout << arr[j] << std::endl;
+			if (arr[j] > arr[j + 1])
+			{
+				Swap(&arr[j], &arr[j + 1]);
+			}
+		}
+	}
+}
+
+template <class T> void PriorityQueue<T>::Swap(T* i, T* j) 
+{
+	T temp = *i;
+	*i = *j;
+	*j = temp;
 }
